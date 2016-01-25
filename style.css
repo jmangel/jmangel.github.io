@@ -1,0 +1,9 @@
+img {
+  position: absolute;
+  right: 0px;
+}
+p {
+    margin-right: 301px;
+    overflow:auto;
+    display:block;
+}
