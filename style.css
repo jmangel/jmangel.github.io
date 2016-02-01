@@ -1,9 +1,52 @@
+@font-face {
+  font-family: FiraSans;
+  src: url('fonts/Fira Sans/FiraSans-Regular.woff');
+}
+
+body {
+  font-family: FiraSans;
+}
 img {
   position: absolute;
-  right: 0px;
+  right: 10px;
 }
 p {
-    margin-right: 301px;
+    margin-right:0;
     overflow:auto;
     display:block;
+}
+
+.intro {
+  margin-right:221px;
+  overflow:auto;
+  display:block;
+  /*padding: 10px;*/
+}
+.left {
+    position:absolute;
+    left:0;
+    top:150px;
+    bottom: 0;
+    width: 200px;
+    padding: 10px;
+    background-color: orange;
+}
+.main {
+    position: absolute;
+    left:220px;
+    top:150px;
+    right:0;
+    /*right:210px;*/
+    padding: 10px;
+    bottom:0;
+}
+.top {
+    position:absolute;
+    right:0;
+    left:0;
+    top: 0;
+    /*left:210px;*/
+    height: 130px;
+    padding: 10px;
+    background-color: blue;
 }
