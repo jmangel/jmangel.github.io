@@ -25,7 +25,7 @@ function Word(token) {
 // Functions
 function displayDict() {
   entries.innerHTML = '';
-  
+
   phrase.words.forEach(function(word) {
     var entry = document.querySelector('#entry').content.cloneNode(true);
     entry.querySelector('.headword').textContent = word.token;
@@ -37,9 +37,9 @@ function displayDict() {
 
 function displayIL() {
   document.querySelector('.transcription').textContent = phrase.transcription;
-  
+
   document.querySelector('#interlinearGloss .words').innerHTML = '';
-  
+
   phrase.words.forEach(function(word) {
     var wordView = document.querySelector('#wordTemplate').content.cloneNode(true);
     wordView.querySelector('.wordToken').textContent = word.token;
@@ -47,13 +47,13 @@ function displayIL() {
     wordView.querySelector('.wordPOS').textContent = word.partOfSpeech;
     document.querySelector('#interlinearGloss .words').appendChild(wordView);
   });
-  
+
   document.querySelector('.translation').textContent = phrase.translation;
 };
 
 function displayJSON() {
   document.querySelector('#jsonArea').textContent = JSON.stringify(phrase, null, 2);
-  
+
   displayViz();
 };
 
@@ -61,12 +61,12 @@ function displayJSON() {
   nodes.charCount.innerHTML = '';
   var uniqueChars = [];
   var rawChars = phrase.transcription.split('');
-  
+
   rawChars.forEach(function(chr) {
     var some = uniqueChars.some(function(c) { return c == chr; });
     if (!some) { uniqueChars.push(chr); }
   });
-  
+
   uniqueChars.forEach(function(chr) {
     var count = rawChars.filter(function(c) { return c == chr; }).length;
     var li = document.createElement('li');
@@ -77,7 +77,7 @@ function displayJSON() {
 
 function displayWords() {
   nodes.wordsArea.innerHTML = '';
-  
+
   phrase.words.forEach(function(word, i) {
     var wordView = document.querySelector('#wordInputTemplate').content.cloneNode(true);
     wordView.querySelector('.wordToken').textContent = word.token;
@@ -111,7 +111,7 @@ function updatePhrase() {
   phrase.transcription = nodes.transcriptionBox.value;
   phrase.translation = nodes.translationBox.value;
   phrase.words = tokenize().map(function(token) { return new Word(token); });
-  
+
   updateWords();
   displayJSON();
 };
@@ -120,11 +120,11 @@ function updateWords() {
   var glossBoxes = Array.prototype.slice.call(document.querySelectorAll('#inputArea .wordGloss')).forEach(function(glossBox, i) {
     if (glossBox.textContent != 'gloss') { phrase.words[i].gloss = glossBox.textContent; }
   });
-  
+
   var posBoxes = Array.prototype.slice.call(document.querySelectorAll('#inputArea .wordPOS')).forEach(function(posBox, i) {
     if (posBox.value != 'select') { phrase.words[i].partOfSpeech = posBox.value; }
   });
-  
+
   displayJSON();
 };
 
@@ -144,21 +144,21 @@ function runDemo() {
     showProgress: true
   }).onbeforechange(function(targetElement){
       if (targetElement.id=="inputArea"){
-        
+
         if (secondTimeOnInput){
           document.querySelector('#transcriptionBox').value="Esta frase es un ejemplo.";
           document.querySelector('#translationBox').value="This sentence is an example.";
           update();
-          
+
           var exampleGlosses=['This','sentence','is','an','example'];
           var examplePosIndeces=[3,1,2,3,1];
     Array.prototype.slice.call(document.querySelectorAll('#inputArea .wordGloss')).forEach(function(glossBox, i) {
             glossBox.textContent=exampleGlosses[i];
-          }); 
+          });
     Array.prototype.slice.call(document.querySelectorAll('#inputArea .wordPOS')).forEach(function(posBox, i) {
             posBox.selectedIndex=examplePosIndeces[i];
           });
-          
+
           updatePhrase();
           updateWords();
           updateBarchart();
@@ -199,7 +199,7 @@ Barchart.prototype.drawBar = function(value){
   var bar = document.createElement('div');
   bar.classList.add('bar');
   var percentage = (value / (this.max + 10)) * 100;
-  bar.style.height = percentage + '%'  ; 
+  bar.style.height = percentage + '%'  ;
   return bar;
 }
 
@@ -219,7 +219,7 @@ var count = function (sequence) {
       tally[item] = 0
     }
     tally[item] += 1;
-    return tally 
+    return tally
   }, {})
 }
 
@@ -236,6 +236,7 @@ function updateBarchart(){
 document.querySelector('#downloadButton').addEventListener('click', download);
 document.querySelector('#demoRestartButton').addEventListener('click', runDemo);
 nodes.transcriptionBox.addEventListener('input', update);
+nodes.transcriptionBox.addEventListener('input', displayWords);
 nodes.transcriptionBox.addEventListener('input', updateBarchart);
 nodes.translationBox.addEventListener('input', updatePhrase);
 nodes.wordsArea.addEventListener('change', updateWords);
