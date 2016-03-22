@@ -1,6 +1,6 @@
 @font-face {
   font-family: FiraSans;
-  src: url('fonts/Fira Sans/FiraSans-Regular.woff');
+  src: url('../fonts/Fira Sans/FiraSans-Regular.woff');
 }
 
 body {
@@ -27,7 +27,8 @@ p {
     position:absolute;
     left:0;
     top:142px;
-    bottom: 0;
+    height:100%;
+    /*bottom: 0;*/
     width: 200px;
     padding: 10px;
     background-color: rgba(255, 170, 0, 0.85);
